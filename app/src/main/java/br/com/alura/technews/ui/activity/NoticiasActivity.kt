@@ -10,7 +10,6 @@ import br.com.alura.technews.ui.fragment.ListaNoticiasFragment
 import br.com.alura.technews.ui.fragment.VisualizaNoticiaFragment
 
 private const val TITULO_APPBAR = "Notícias"
-private const val TAG_FRAGMENT_LISTA_NOTICIAS = "lista-noticias"
 
 class NoticiasActivity : AppCompatActivity() {
 
@@ -21,9 +20,7 @@ class NoticiasActivity : AppCompatActivity() {
         val transacao = supportFragmentManager.beginTransaction()
         transacao.add(
             R.id.activity_noticias_container,
-            ListaNoticiasFragment(),
-            TAG_FRAGMENT_LISTA_NOTICIAS
-        )
+            ListaNoticiasFragment())
         transacao.commit()
     }
 
@@ -56,16 +53,11 @@ class NoticiasActivity : AppCompatActivity() {
     }
 
     private fun abreVisualizadorNoticia(noticia: Noticia) {
-        val fragmentEncontrado =
-            supportFragmentManager.findFragmentByTag(TAG_FRAGMENT_LISTA_NOTICIAS)
         val transacao = supportFragmentManager.beginTransaction()
         val fragment = VisualizaNoticiaFragment()
         val dados = Bundle()
         dados.putLong(NOTICIA_ID_CHAVE, noticia.id)
         fragment.arguments = dados
-        if (fragmentEncontrado != null) {
-            transacao.remove(fragmentEncontrado)
-        }
         transacao.replace(R.id.activity_noticias_container, fragment)
         transacao.commit()
     }
