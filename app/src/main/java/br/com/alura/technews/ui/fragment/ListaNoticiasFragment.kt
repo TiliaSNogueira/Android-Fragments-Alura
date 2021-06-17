@@ -15,9 +15,11 @@ import br.com.alura.technews.ui.recyclerview.adapter.ListaNoticiasAdapter
 import br.com.alura.technews.ui.viewmodel.ListaNoticiasViewModel
 import kotlinx.android.synthetic.main.lista_noticias.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.lang.IllegalArgumentException
+
+private const val TITULO_APPBAR = "Notícias"
 
 class ListaNoticiasFragment : Fragment() {
+
 
     private val MENSAGEM_FALHA_CARREGAR_NOTICIAS = "Não foi possível carregar as novas notícias"
 
@@ -28,15 +30,15 @@ class ListaNoticiasFragment : Fragment() {
     }
     private val viewModel: ListaNoticiasViewModel by viewModel()
 
-  //  private lateinit var listener: ListaNoticiasListener
-    var quandoFabSalvaNoticiaClicado : () -> Unit = {}
-    var quandoNoticiaSelecionada : (noticia: Noticia) -> Unit = {}
+    //  private lateinit var listener: ListaNoticiasListener
+    var quandoFabSalvaNoticiaClicado: () -> Unit = {}
+    var quandoNoticiaSelecionada: (noticia: Noticia) -> Unit = {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         buscaNoticias()
         //para ter acesso aos métodos da ListaNoticiasActivity
-       // listener = activity as ListaNoticiasListener
+        // listener = activity as ListaNoticiasListener
 
     }
 
@@ -52,6 +54,7 @@ class ListaNoticiasFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         configuraRecyclerView()
         configuraFabAdicionaNoticia()
+        activity?.title = TITULO_APPBAR
     }
 
     private fun configuraFabAdicionaNoticia() {
